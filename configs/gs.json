@@ -1,0 +1,19 @@
+{
+  "iterations": 18000,
+  "sh_degree": 3,
+  "seed": 190087,
+  "resolution": -1,
+  "alpha_start": 13001,
+  "alpha_stop": 16000,
+  "alpha_lr": 0.005,
+  "alpha_objective": "paper_joint_render_loss",
+  "ssim_backend": "upstream_torch_both_image_gradients",
+  "optimization": {
+    "densify_from_iter": 500,
+    "densify_until_iter": 6000,
+    "densification_interval": 100,
+    "opacity_reset_interval": 20000,
+    "lambda_dssim": 0.2,
+    "optimizer_type": "default"
+  }
+}

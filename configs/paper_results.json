@@ -1,0 +1,82 @@
+{
+  "schema": "fujinsplat.paper_results.v1",
+  "result_type": "paper_reported",
+  "source": {
+    "title": "FujinSplat: Seeing Through Smoke with RAW-Domain Gaussian Splatting",
+    "pdf_sha256": "72a2cbe1dfd9f8c2eb1b39e8eba7e271585f83eed626226c24b64c8e8166fa04",
+    "table": 1,
+    "page": 7,
+    "values": "Transcribed exactly as printed in the user-provided paper PDF."
+  },
+  "source_pairs": 195,
+  "held_views": 32,
+  "held_views_per_scene": 4,
+  "equal_scene": {
+    "psnr": 18.42,
+    "ssim": 0.679,
+    "lpips": 0.541
+  },
+  "per_scene": {
+    "Akikaze": {
+      "psnr": 19.91,
+      "ssim": 0.699,
+      "lpips": 0.494
+    },
+    "Futaba": {
+      "psnr": 18.88,
+      "ssim": 0.763,
+      "lpips": 0.485
+    },
+    "Hinoki": {
+      "psnr": 16.46,
+      "ssim": 0.49,
+      "lpips": 0.722
+    },
+    "Koharu": {
+      "psnr": 18.85,
+      "ssim": 0.705,
+      "lpips": 0.517
+    },
+    "Midori": {
+      "psnr": 20.11,
+      "ssim": 0.749,
+      "lpips": 0.479
+    },
+    "Natsume": {
+      "psnr": 17.33,
+      "ssim": 0.687,
+      "lpips": 0.533
+    },
+    "Shirohana": {
+      "psnr": 16.68,
+      "ssim": 0.57,
+      "lpips": 0.581
+    },
+    "Tsubaki": {
+      "psnr": 19.15,
+      "ssim": 0.771,
+      "lpips": 0.517
+    }
+  },
+  "printed_decimal_places": {
+    "psnr": 2,
+    "ssim": 3,
+    "lpips": 3
+  },
+  "table_2": {
+    "excluded_scene": "Akikaze",
+    "scenes": 7,
+    "psnr": 18.2083,
+    "reconstruction_minutes": 42
+  },
+  "aggregation": "Average the unrounded four held-view scores within each scene, then weight scenes equally. Published rounded cells are preserved as printed.",
+  "protocol": "q8 RGB; PSNR/SSIM data_range=1; SSIM uniform7/sample covariance; LPIPS-VGG v0.1; area resize render only if needed; no alignment.",
+  "paper_controller_training": {
+    "synthetic_captures": 1400,
+    "steps": 1500,
+    "batch_size": 16,
+    "learning_rate": 0.0003,
+    "seed": 90202
+  },
+  "artifact_binding": "Paper reference values only; no controller or Gaussian checkpoint is certified by this table."
+}

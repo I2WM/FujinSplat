@@ -1,0 +1,602 @@
+{
+  "scenes": {
+    "Akikaze": {
+      "camera_wb": [
+        2.371094,
+        1,
+        1.660156
+      ],
+      "daylight_wb": [
+        2.626616,
+        1,
+        1.387839
+      ],
+      "n_checked": 3,
+      "range": {
+        "R": {
+          "min": 2.371094,
+          "max": 2.371094
+        },
+        "G": {
+          "min": 1,
+          "max": 1
+        },
+        "B": {
+          "min": 1.660156,
+          "max": 1.660156
+        }
+      },
+      "camera_wb_raw_rggb": [
+        2428,
+        1024,
+        1700,
+        1024
+      ],
+      "daylight_wb_raw_rggb": [
+        2.4478,
+        0.9319,
+        1.2934,
+        0
+      ],
+      "views_checked": [
+        "0001.ARW",
+        "0013.ARW",
+        "0025.ARW"
+      ],
+      "haze_clean_pair_check": {
+        "val_camera_wb_raw": [
+          2428,
+          1024,
+          1700,
+          1024
+        ],
+        "train_camera_wb_raw": [
+          2428,
+          1024,
+          1700,
+          1024
+        ],
+        "val_daylight_wb_raw": [
+          2.4478163719177246,
+          0.9319279193878174,
+          1.2933659553527832,
+          0
+        ],
+        "train_daylight_wb_raw": [
+          2.4478163719177246,
+          0.9319279193878174,
+          1.2933659553527832,
+          0
+        ],
+        "identical_camera_wb": true,
+        "identical_daylight_wb": true
+      }
+    },
+    "Futaba": {
+      "camera_wb": [
+        2.371094,
+        1,
+        1.660156
+      ],
+      "daylight_wb": [
+        2.626616,
+        1,
+        1.387839
+      ],
+      "n_checked": 3,
+      "range": {
+        "R": {
+          "min": 2.371094,
+          "max": 2.371094
+        },
+        "G": {
+          "min": 1,
+          "max": 1
+        },
+        "B": {
+          "min": 1.660156,
+          "max": 1.660156
+        }
+      },
+      "camera_wb_raw_rggb": [
+        2428,
+        1024,
+        1700,
+        1024
+      ],
+      "daylight_wb_raw_rggb": [
+        2.4478,
+        0.9319,
+        1.2934,
+        0
+      ],
+      "views_checked": [
+        "0001.arw",
+        "0012.arw",
+        "0023.arw"
+      ],
+      "haze_clean_pair_check": {
+        "val_camera_wb_raw": [
+          2428,
+          1024,
+          1700,
+          1024
+        ],
+        "train_camera_wb_raw": [
+          2428,
+          1024,
+          1700,
+          1024
+        ],
+        "val_daylight_wb_raw": [
+          2.4478163719177246,
+          0.9319279193878174,
+          1.2933659553527832,
+          0
+        ],
+        "train_daylight_wb_raw": [
+          2.4478163719177246,
+          0.9319279193878174,
+          1.2933659553527832,
+          0
+        ],
+        "identical_camera_wb": true,
+        "identical_daylight_wb": true
+      }
+    },
+    "Hinoki": {
+      "camera_wb": [
+        2.371094,
+        1,
+        1.660156
+      ],
+      "daylight_wb": [
+        2.626616,
+        1,
+        1.387839
+      ],
+      "n_checked": 3,
+      "range": {
+        "R": {
+          "min": 2.371094,
+          "max": 2.371094
+        },
+        "G": {
+          "min": 1,
+          "max": 1
+        },
+        "B": {
+          "min": 1.660156,
+          "max": 1.660156
+        }
+      },
+      "camera_wb_raw_rggb": [
+        2428,
+        1024,
+        1700,
+        1024
+      ],
+      "daylight_wb_raw_rggb": [
+        2.4478,
+        0.9319,
+        1.2934,
+        0
+      ],
+      "views_checked": [
+        "0001.ARW",
+        "0012.ARW",
+        "0022.ARW"
+      ],
+      "haze_clean_pair_check": {
+        "val_camera_wb_raw": [
+          2428,
+          1024,
+          1700,
+          1024
+        ],
+        "train_camera_wb_raw": [
+          2428,
+          1024,
+          1700,
+          1024
+        ],
+        "val_daylight_wb_raw": [
+          2.4478163719177246,
+          0.9319279193878174,
+          1.2933659553527832,
+          0
+        ],
+        "train_daylight_wb_raw": [
+          2.4478163719177246,
+          0.9319279193878174,
+          1.2933659553527832,
+          0
+        ],
+        "identical_camera_wb": true,
+        "identical_daylight_wb": true
+      }
+    },
+    "Koharu": {
+      "camera_wb": [
+        2.371094,
+        1,
+        1.660156
+      ],
+      "daylight_wb": [
+        2.626616,
+        1,
+        1.387839
+      ],
+      "n_checked": 3,
+      "range": {
+        "R": {
+          "min": 2.371094,
+          "max": 2.371094
+        },
+        "G": {
+          "min": 1,
+          "max": 1
+        },
+        "B": {
+          "min": 1.660156,
+          "max": 1.660156
+        }
+      },
+      "camera_wb_raw_rggb": [
+        2428,
+        1024,
+        1700,
+        1024
+      ],
+      "daylight_wb_raw_rggb": [
+        2.4478,
+        0.9319,
+        1.2934,
+        0
+      ],
+      "views_checked": [
+        "0001.ARW",
+        "0013.ARW",
+        "0025.ARW"
+      ],
+      "haze_clean_pair_check": {
+        "val_camera_wb_raw": [
+          2428,
+          1024,
+          1700,
+          1024
+        ],
+        "train_camera_wb_raw": [
+          2428,
+          1024,
+          1700,
+          1024
+        ],
+        "val_daylight_wb_raw": [
+          2.4478163719177246,
+          0.9319279193878174,
+          1.2933659553527832,
+          0
+        ],
+        "train_daylight_wb_raw": [
+          2.4478163719177246,
+          0.9319279193878174,
+          1.2933659553527832,
+          0
+        ],
+        "identical_camera_wb": true,
+        "identical_daylight_wb": true
+      }
+    },
+    "Midori": {
+      "camera_wb": [
+        2.371094,
+        1,
+        1.660156
+      ],
+      "daylight_wb": [
+        2.626616,
+        1,
+        1.387839
+      ],
+      "n_checked": 3,
+      "range": {
+        "R": {
+          "min": 2.371094,
+          "max": 2.371094
+        },
+        "G": {
+          "min": 1,
+          "max": 1
+        },
+        "B": {
+          "min": 1.660156,
+          "max": 1.660156
+        }
+      },
+      "camera_wb_raw_rggb": [
+        2428,
+        1024,
+        1700,
+        1024
+      ],
+      "daylight_wb_raw_rggb": [
+        2.4478,
+        0.9319,
+        1.2934,
+        0
+      ],
+      "views_checked": [
+        "0001.arw",
+        "0014.arw",
+        "0026.arw"
+      ],
+      "haze_clean_pair_check": {
+        "val_camera_wb_raw": [
+          2428,
+          1024,
+          1700,
+          1024
+        ],
+        "train_camera_wb_raw": [
+          2428,
+          1024,
+          1700,
+          1024
+        ],
+        "val_daylight_wb_raw": [
+          2.4478163719177246,
+          0.9319279193878174,
+          1.2933659553527832,
+          0
+        ],
+        "train_daylight_wb_raw": [
+          2.4478163719177246,
+          0.9319279193878174,
+          1.2933659553527832,
+          0
+        ],
+        "identical_camera_wb": true,
+        "identical_daylight_wb": true
+      }
+    },
+    "Natsume": {
+      "camera_wb": [
+        2.371094,
+        1,
+        1.660156
+      ],
+      "daylight_wb": [
+        2.626616,
+        1,
+        1.387839
+      ],
+      "n_checked": 3,
+      "range": {
+        "R": {
+          "min": 2.371094,
+          "max": 2.371094
+        },
+        "G": {
+          "min": 1,
+          "max": 1
+        },
+        "B": {
+          "min": 1.660156,
+          "max": 1.660156
+        }
+      },
+      "camera_wb_raw_rggb": [
+        2428,
+        1024,
+        1700,
+        1024
+      ],
+      "daylight_wb_raw_rggb": [
+        2.4478,
+        0.9319,
+        1.2934,
+        0
+      ],
+      "views_checked": [
+        "0001.ARW",
+        "0013.ARW",
+        "0025.ARW"
+      ],
+      "haze_clean_pair_check": {
+        "val_camera_wb_raw": [
+          2428,
+          1024,
+          1700,
+          1024
+        ],
+        "train_camera_wb_raw": [
+          2428,
+          1024,
+          1700,
+          1024
+        ],
+        "val_daylight_wb_raw": [
+          2.4478163719177246,
+          0.9319279193878174,
+          1.2933659553527832,
+          0
+        ],
+        "train_daylight_wb_raw": [
+          2.4478163719177246,
+          0.9319279193878174,
+          1.2933659553527832,
+          0
+        ],
+        "identical_camera_wb": true,
+        "identical_daylight_wb": true
+      }
+    },
+    "Shirohana": {
+      "camera_wb": [
+        2.371094,
+        1,
+        1.660156
+      ],
+      "daylight_wb": [
+        2.626616,
+        1,
+        1.387839
+      ],
+      "n_checked": 3,
+      "range": {
+        "R": {
+          "min": 2.371094,
+          "max": 2.371094
+        },
+        "G": {
+          "min": 1,
+          "max": 1
+        },
+        "B": {
+          "min": 1.660156,
+          "max": 1.660156
+        }
+      },
+      "camera_wb_raw_rggb": [
+        2428,
+        1024,
+        1700,
+        1024
+      ],
+      "daylight_wb_raw_rggb": [
+        2.4478,
+        0.9319,
+        1.2934,
+        0
+      ],
+      "views_checked": [
+        "0001.ARW",
+        "0014.ARW",
+        "0026.ARW"
+      ],
+      "haze_clean_pair_check": {
+        "val_camera_wb_raw": [
+          2428,
+          1024,
+          1700,
+          1024
+        ],
+        "train_camera_wb_raw": [
+          2428,
+          1024,
+          1700,
+          1024
+        ],
+        "val_daylight_wb_raw": [
+          2.4478163719177246,
+          0.9319279193878174,
+          1.2933659553527832,
+          0
+        ],
+        "train_daylight_wb_raw": [
+          2.4478163719177246,
+          0.9319279193878174,
+          1.2933659553527832,
+          0
+        ],
+        "identical_camera_wb": true,
+        "identical_daylight_wb": true
+      }
+    },
+    "Tsubaki": {
+      "camera_wb": [
+        2.371094,
+        1,
+        1.660156
+      ],
+      "daylight_wb": [
+        2.626616,
+        1,
+        1.387839
+      ],
+      "n_checked": 3,
+      "range": {
+        "R": {
+          "min": 2.371094,
+          "max": 2.371094
+        },
+        "G": {
+          "min": 1,
+          "max": 1
+        },
+        "B": {
+          "min": 1.660156,
+          "max": 1.660156
+        }
+      },
+      "camera_wb_raw_rggb": [
+        2428,
+        1024,
+        1700,
+        1024
+      ],
+      "daylight_wb_raw_rggb": [
+        2.4478,
+        0.9319,
+        1.2934,
+        0
+      ],
+      "views_checked": [
+        "0001.arw",
+        "0012.arw",
+        "0023.arw"
+      ],
+      "haze_clean_pair_check": {
+        "val_camera_wb_raw": [
+          2428,
+          1024,
+          1700,
+          1024
+        ],
+        "train_camera_wb_raw": [
+          2428,
+          1024,
+          1700,
+          1024
+        ],
+        "val_daylight_wb_raw": [
+          2.4478163719177246,
+          0.9319279193878174,
+          1.2933659553527832,
+          0
+        ],
+        "train_daylight_wb_raw": [
+          2.4478163719177246,
+          0.9319279193878174,
+          1.2933659553527832,
+          0
+        ],
+        "identical_camera_wb": true,
+        "identical_daylight_wb": true
+      }
+    }
+  },
+  "note": "Camera and daylight white-balance multipliers were read from original camera-file metadata, not inferred from demosaiced pixel values. Raw arrays use the original rawpy [R,G,B,G2] order and normalized triplets use G=1. The stored numbers and global flags are preserved from the frozen synthesis input. The audit sampled three source clean-side headers per scene and the same-stem hazy partner of the first sample; the constancy flags describe that frozen configuration, not a new exhaustive metadata audit. Absolute source-file paths were removed for portable distribution. No white balance is applied to the source RAW pixels by this file.",
+  "global": {
+    "camera_wb": [
+      2.371094,
+      1,
+      1.660156
+    ],
+    "daylight_wb": [
+      2.626616,
+      1,
+      1.387839
+    ],
+    "camera_wb_raw_rggb": [
+      2428,
+      1024,
+      1700,
+      1024
+    ],
+    "constant_across_scenes": true,
+    "constant_across_views": true,
+    "constant_haze_vs_clean": true
+  }
+}

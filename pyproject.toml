@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fujinsplat"
+version = "0.3.0"
+description = "FujinSplat RAW restoration and static Gaussian reconstruction"
+requires-python = ">=3.9"
+readme = "README.md"
+license = {file = "LICENSE.md"}
+dependencies = ["torch>=2.0,<3", "torchvision", "numpy<2", "Pillow", "opencv-python", "scikit-image", "lpips", "plyfile", "tqdm"]
+
+[project.scripts]
+fujinsplat = "fujinsplat.cli:main"
+
+[project.optional-dependencies]
+synthesis = ["rawpy", "transformers", "safetensors"]
+
+[tool.setuptools.packages.find]
+include = ["fujinsplat*", "arguments*", "gaussian_renderer*", "scene*", "utils*"]
+exclude = ["tests*", "submodules*"]
+
+[tool.setuptools.package-data]
+fujinsplat = ["configs/*.json", "data/synthesis_prerequisites/*.json"]

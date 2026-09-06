@@ -1,0 +1,4 @@
+-r reference.txt
+rawpy==0.19.1
+transformers==4.46.3
+safetensors==0.7.0

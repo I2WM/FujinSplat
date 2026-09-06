@@ -1,0 +1,46 @@
+{
+  "schema": "fujinsplat.frozen_synthesis_prerequisites.v1",
+  "files": {
+    "raw_population_195.json": {
+      "bytes": 29893,
+      "sha256": "03e10fe44cb0624ee482d905c26abe55c9cb69a33bdc948a3bf49bfe9885ac53",
+      "original_input_sha256": "03e10fe44cb0624ee482d905c26abe55c9cb69a33bdc948a3bf49bfe9885ac53",
+      "changes": "none; byte-identical frozen input"
+    },
+    "realx_camera_wb.json": {
+      "bytes": 11862,
+      "sha256": "bf55631fd20127563687e2711b64fad21178e38b482ff109222e02e44cb2bab9",
+      "original_input_sha256": "dc42398dab411090c99d96d3611f638cc2c939377e8d8539b52b8d5080f9c42e",
+      "changes": "removed absolute metadata paths and clarified note; all numeric and boolean fields preserved"
+    }
+  },
+  "original_derivation_script_sha256": {
+    "fit_population.py": "a17251cc3971842bfc1b2d99e726fd2972b5a6cc5eafdbed17d6b7cfc29015d2",
+    "wb.py": "4737c994952f99d674e0290135c2212c37af0a63eeb197a36ec3909e301b81e5"
+  },
+  "source_pair_count": 195,
+  "per_scene_counts": {
+    "Akikaze": 25,
+    "Futaba": 23,
+    "Hinoki": 22,
+    "Koharu": 25,
+    "Midori": 26,
+    "Natsume": 25,
+    "Shirohana": 26,
+    "Tsubaki": 23
+  },
+  "t_min_median_max": [0.14671910217202616, 0.36483134807284345, 0.9016107269054875],
+  "clean_median": 0.05384201928973198,
+  "airlight_over_median": 1.508654711791825,
+  "global_camera_wb": [2.371094, 1.0, 1.660156],
+  "validation": {
+    "original_inputs_match_frozen_synthesis_contract_hashes": true,
+    "population_byte_identical": true,
+    "wb_all_numeric_and_boolean_fields_identical": true,
+    "runtime_input_metadata_identical": true,
+    "existing_external_capture_metadata_count_checked": 1400,
+    "image_reads": 0,
+    "training_started": false,
+    "synthesis_started": false
+  }
+}
