@@ -7,24 +7,23 @@
   Gengjia Chang · Ziteng Cui · Shuhong Liu
 </p>
 
-<p align="center">
-  <a href="#setup">Setup</a> ·
-  <a href="#training">Training</a> ·
-  <a href="#reconstruction">Reconstruction</a> ·
-  <a href="#results">Results</a> ·
-  <a href="#citation">Citation</a>
-</p>
+<!-- Replace the three href="#" placeholders when the paper and download URLs are ready. -->
+<h3 align="center">
+  <a href="#" title="Paper link coming soon">📄 Paper</a> |
+  <a href="https://i2wm.github.io/FujinSplat/">🌐 Project Page</a> |
+  <a href="#" title="Controller weights download coming soon">🧠 Controller Weights</a> |
+  <a href="#" title="Dataset download coming soon">📦 Dataset</a>
+</h3>
 
 ## Overview
 
 ![FujinSplat paper teaser: smoke removal and novel-view synthesis](assets/teaser.png)
 
+FujinSplat addresses the problem in the RAW domain, where the two processes remain separable. A per-scene Base ISP is fitted from the scene's hazy RAW captures to its own camera renderings and then frozen, providing a fixed photometric anchor that performs no dehazing. Analyzing expert corrections reveals a compact, low-dimensional correction space identifiable from RAW alone. FujinSplat therefore fits per-view action answers at the training poses and trains a single scene-agnostic controller to regress them from RAW; the corrected views supervise one static 3D Gaussian representation, jointly with a bounded per-view residual that reconciles cross-view photometric inconsistencies. On the RealX3D real-world smoke benchmark FujinSplat clearly outperforms the strongest comparable baseline, ahead of both physics-based reconstruction and restoration-then-3DGS pipelines.
+
 ## Method
 
 ![FujinSplat pipeline from the paper](assets/pipeline.png)
-
-A frozen Base ISP and RAW-guided color flow correct the training views.
-Delta-ISP aligns their appearance during 3DGS training; novel views use the static renderer.
 
 ## Setup
 
@@ -158,14 +157,6 @@ Paper results: **18.42 dB PSNR · 0.679 SSIM · 0.541 LPIPS**.
 
 The seven-scene subset excluding Akikaze reports 18.2083 dB.
 [Machine-readable results](configs/paper_results.json).
-
-## Checks
-
-```bash
-CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=2 python -B -m unittest discover -s tests -v
-```
-
-59 CPU tests pass. Full GPU reproduction with the final release weights is pending.
 
 ## Citation
 
