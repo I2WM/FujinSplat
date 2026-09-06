@@ -15,20 +15,23 @@
   <a href="#citation">Citation</a>
 </p>
 
-## Overview
-
 ![FujinSplat paper teaser: smoke removal and novel-view synthesis](assets/teaser.png)
 
-## Method
+<details>
+<summary>Method overview</summary>
 
-![FujinSplat pipeline from the paper](assets/pipeline.png)
+![FujinSplat pipeline](assets/pipeline.png)
 
-A frozen Base ISP and RAW-guided color flow correct the training views.
-Delta-ISP aligns their appearance during 3DGS training; novel views use the static renderer.
+Base ISP + RAW color flow + training-only Delta-ISP → static 3DGS.
+
+</details>
 
 ## Setup
 
-Linux · Python 3.9 · PyTorch 2.0.1 · CUDA toolkit 11.8. Run from the repository root.
+Linux · Python 3.9 · PyTorch 2.0.1 · CUDA 11.8. Run commands from the repository root.
+
+<details>
+<summary>Installation</summary>
 
 ```bash
 conda create -n fujinsplat python=3.9 -y
@@ -42,12 +45,14 @@ python -m pip install --no-build-isolation ./submodules/simple-knn
 python -m pip install --no-build-isolation --no-deps -e .
 ```
 
-CUDA extension sources are bundled in `submodules/`.
+</details>
 
-### Data and weights
+Data and weights: Google Drive links coming soon.
 
-Google Drive links will be added here. RAW is demosaiced sensor RGB without WB or gamma;
-NPZ key `linear_rgb` is H×W×3 uint16 or normalized floating point.
+<details>
+<summary>Data layout</summary>
+
+RAW NPZ: `linear_rgb`, H×W×3 uint16 or normalized float; no WB or gamma.
 
 ```text
 DATA_ROOT/
@@ -61,9 +66,11 @@ DATA_ROOT/
   weights/base/SCENE/complete_model.pt
 ```
 
+</details>
+
 ## Reconstruction
 
-Use the supplied Controller and Base weights. Choose a fresh output directory.
+Set paths to the downloaded weights and data; use a new output directory.
 
 ```bash
 export DATA_ROOT=/absolute/path/to/data
@@ -86,9 +93,8 @@ python -m fujinsplat evaluate --renders "$WORK_ROOT/renders" --rgb-root "$RGB_RO
   --output "$WORK_ROOT/evaluation" --variant FujinSplat --purpose final_readout
 ```
 
-Defaults: 18k iterations, SH3, Delta active at 13k–16k. Scores are saved to
-`RESULT.json` and `held_view_metrics.csv`. Evaluation averages four held views per scene,
-then weights all eight scenes equally.
+18k iterations · SH3 · Delta at 13k–16k. Outputs: `RESULT.json` and
+`held_view_metrics.csv`; four held views per scene, equal-scene averaging.
 
 ## Results
 
@@ -110,34 +116,15 @@ Paper results: **18.42 dB PSNR · 0.679 SSIM · 0.541 LPIPS**.
 
 <sub>Top: smoky RGB. Bottom: ft8000 reconstructions at the same source-camera poses.</sub>
 
-<details>
-<summary>Per-scene paper results</summary>
-
-| Scene | PSNR ↑ | SSIM ↑ | LPIPS ↓ |
-| --- | ---: | ---: | ---: |
-| Akikaze | 19.91 | 0.699 | 0.494 |
-| Futaba | 18.88 | 0.763 | 0.485 |
-| Hinoki | 16.46 | 0.490 | 0.722 |
-| Koharu | 18.85 | 0.705 | 0.517 |
-| Midori | 20.11 | 0.749 | 0.479 |
-| Natsume | 17.33 | 0.687 | 0.533 |
-| Shirohana | 16.68 | 0.570 | 0.581 |
-| Tsubaki | 19.15 | 0.771 | 0.517 |
-| **Average** | **18.42** | **0.679** | **0.541** |
-
-The seven-scene subset excluding Akikaze reports 18.2083 dB.
-[Machine-readable results](configs/paper_results.json).
-
-</details>
+[Per-scene paper metrics](configs/paper_results.json).
 
 ## Training
 
 <details>
 <summary>Calibrate the Base ISP and train the Controller</summary>
 
-Use the path variables above and run these steps before reconstruction.
-Additional inputs: native L257 parent Bases, 16 external calibration ARWs and
-Depth-Anything-V2-Small safetensors weights.
+Before reconstruction, using the paths above. Requires L257 parent Bases,
+16 calibration ARWs and Depth-Anything-V2-Small weights.
 
 ```bash
 export BASE_ROOT="$WORK_ROOT/bases"
@@ -175,21 +162,20 @@ python -m fujinsplat train-controller \
 export CONTROLLER="$WORK_ROOT/controller/checkpoint.pt"
 ```
 
-Base calibration fits hazy RAW to hazy RGB with 100 warm-up and 400 joint updates.
-Controller training uses 1400 external RAW captures and the bundled
-[195-pair statistics and camera WB](fujinsplat/data/synthesis_prerequisites/MANIFEST.json).
-The calibration manifest uses schema `fujinsplat.external_raw.v1` with 16
-`rows` entries: `{"capture_id": "name", "raw": "/path/to/capture.ARW"}`.
+Base: 100 + 400 updates. Controller: 1400 external RAWs and
+[bundled statistics](fujinsplat/data/synthesis_prerequisites/MANIFEST.json).
+Calibration manifest: `schema: fujinsplat.external_raw.v1`, with 16 `rows`
+entries: `{"capture_id": "name", "raw": "/path/to/capture.ARW"}`.
 
-</details>
-
-## Checks
+CPU checks:
 
 ```bash
 CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=2 python -B -m unittest discover -s tests -v
 ```
 
-49 CPU tests pass. Full GPU reproduction with the final release weights is pending.
+49 tests pass; full GPU reproduction with final release weights is pending.
+
+</details>
 
 ## Citation
 
