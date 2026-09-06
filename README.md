@@ -130,18 +130,16 @@ Paper results: **18.42 dB PSNR · 0.679 SSIM · 0.541 LPIPS**.
 <table>
 <tr><th>Shirohana</th><th>Koharu</th><th>Futaba</th></tr>
 <tr>
-<td><img src="assets/ft8000-shirohana-0014-smoke.jpg" width="300" alt="Shirohana source view 0014, smoky input"></td>
-<td><img src="assets/ft8000-koharu-0013-smoke.jpg" width="300" alt="Koharu source view 0013, smoky input"></td>
-<td><img src="assets/ft8000-futaba-0012-smoke.jpg" width="300" alt="Futaba source view 0012, smoky input"></td>
+<td><img src="assets/shirohana-0014-smoke.jpg" width="300" alt="Shirohana source view 0014, smoky input"></td>
+<td><img src="assets/koharu-0013-smoke.jpg" width="300" alt="Koharu source view 0013, smoky input"></td>
+<td><img src="assets/futaba-0012-smoke.jpg" width="300" alt="Futaba source view 0012, smoky input"></td>
 </tr>
 <tr>
-<td><img src="assets/ft8000-shirohana-0014-fujinsplat.png" width="300" alt="Shirohana view 0014, ft8000 static reconstruction"></td>
-<td><img src="assets/ft8000-koharu-0013-fujinsplat.png" width="300" alt="Koharu view 0013, ft8000 static reconstruction"></td>
-<td><img src="assets/ft8000-futaba-0012-fujinsplat.png" width="300" alt="Futaba view 0012, ft8000 static reconstruction"></td>
+<td><img src="assets/shirohana-0014-fujinsplat.png" width="300" alt="Shirohana source view 0014, static reconstruction"></td>
+<td><img src="assets/koharu-0013-fujinsplat.png" width="300" alt="Koharu source view 0013, static reconstruction"></td>
+<td><img src="assets/futaba-0012-fujinsplat.png" width="300" alt="Futaba source view 0012, static reconstruction"></td>
 </tr>
 </table>
-
-<sub>Top: smoky RGB. Bottom: ft8000 reconstructions at the same source-camera poses.</sub>
 
 | Scene | PSNR ↑ | SSIM ↑ | LPIPS ↓ |
 | --- | ---: | ---: | ---: |

@@ -1,4 +1,4 @@
-"""Thin Graphdeco integration; no legacy raw_work or WaterSplatting imports."""
+"""Graphdeco integration for prepared RAW-domain Gaussian scenes."""
 
 import math
 from pathlib import Path
@@ -93,11 +93,10 @@ def load_point_cloud(path):
 
 
 def developed_target(base_encoded, action, render_shape, *, active):
-    """Paper joint-render objective: alpha receives the SAME image loss as GS.
+    """Develop the training target for the joint Gaussian/Delta objective.
 
-    Do not detach the target in the active window. The old 18.42 implementation
-    routed alpha through a separate 64px statistical loss, which is not the
-    equation specified by the now-authoritative paper snapshot.
+    Keep the target differentiable in the active window so alpha receives
+    the same image loss as the Gaussians.
     """
     with torch.set_grad_enabled(active):
         target = apply(base_encoded[None], action)[0].clamp(0, 1)

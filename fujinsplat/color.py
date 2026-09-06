@@ -44,8 +44,8 @@ def q8(encoded):
 def reconstruction_loss(prediction_encoded, target_encoded, valid=None):
     """Linear L1 + .25 encoded L1 + .01 OOB; inputs are ENCODED.
 
-    The old helper expected linear inputs. Passing encoded MCF outputs into
-    it would apply the display encoding twice; this boundary is intentional.
+    Decode the MCF outputs for the linear-light term; use the encoded inputs
+    directly for the display-space term.
     """
     weight = torch.ones_like(prediction_encoded) if valid is None else valid.expand_as(prediction_encoded)
     denom = weight.sum().clamp_min(1)

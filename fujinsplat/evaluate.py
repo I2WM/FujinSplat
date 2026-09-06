@@ -36,7 +36,7 @@ def main():
     p.add_argument("--renders", type=Path, required=True, help="root/SCENE/PREDICTIONS_SEALED.json")
     p.add_argument("--rgb-root", type=Path, required=True, help="scorer's official root/SCENE/test/STEM.JPG")
     p.add_argument("--output", type=Path, required=True)
-    p.add_argument("--variant", default="FujinSplat-new")
+    p.add_argument("--variant", default="FujinSplat")
     p.add_argument("--device", default="cuda:0")
     p.add_argument("--purpose", choices=("final_readout", "development"), default="final_readout")
     a = p.parse_args()
@@ -64,7 +64,7 @@ def main():
     perceptual = lpips.LPIPS(net="vgg", version="0.1").eval().to(a.device)
     results = []
     for r in sealed:
-        # Match score_coupling_epsilon_ablation_all8_v1.py literally.
+        # Compare each rendered view to its official clean reference.
         target_path = a.rgb_root / r["scene"] / "test" / f"{r['stem']}.JPG"
         with Image.open(r["path"]) as im:
             prediction = np.asarray(im.convert("RGB")).copy()

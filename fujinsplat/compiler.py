@@ -1,8 +1,7 @@
-"""Numerical compiler port from the user-supplied supplementary simulation.
+"""Compile linear-light haze parameters into encoded-RGB MCF coefficients.
 
-The public entry is compile_from_raw: enc o affine o dec, NOT the older
-encoded-affine compile_action helper in compile_final.py. This module is
-NumPy-only, has no I/O, random state, refitting, or fallback to 25 source pairs.
+The public entry is compile_from_raw: enc o affine o dec.
+This NumPy-only module has no I/O, random state or parameter fitting.
 """
 import numpy as np
 
@@ -178,6 +177,5 @@ def pack_573(act):
     for k, (s1, s2, s3) in enumerate(act["coupling"]):
         coupling[k] = np.stack([s1, s2, s3])
     return np.concatenate([curves.ravel(), coupling.ravel()])
-
 
 

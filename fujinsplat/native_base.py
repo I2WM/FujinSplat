@@ -2,7 +2,7 @@
 
 The output is learned encoded camera RGB; do not apply another OETF.
 R33 is a dense 33^3 residual lattice, not a rank-33 factorization.
-Core interpolation arithmetic is retained from the audited Phase19 implementation.
+The interpolation preserves the pointwise checkpoint arithmetic.
 """
 from dataclasses import dataclass
 from pathlib import Path
@@ -32,7 +32,7 @@ def _require_rgb(value: Tensor, label: str, *, unit_domain: bool = False) -> Non
 
 
 def raw_lut_coordinate(raw: Tensor, scale: Tensor) -> Tensor:
-    """Evaluate the historical U257 rational coordinate without dead-branch NaNs."""
+    """Map RAW to a bounded rational LUT coordinate without dead-branch NaNs."""
 
     nonnegative = raw >= 0.0
     denominator = torch.where(nonnegative, raw + scale, torch.ones_like(raw))
@@ -217,6 +217,7 @@ class NativeBase(nn.Module):
 def load_native_base(path, device="cpu"):
     # Only trusted project checkpoints are supported; pickle inputs are not public uploads.
     payload = torch.load(Path(path), map_location="cpu", weights_only=False)
+    # Accept the existing compact-Base checkpoint format as well as the release schema.
     if payload.get("schema") not in {
         "PHASE22_COMPACT_NATIVE_HAZE_BASE_CHECKPOINT_V0", "fujinsplat.native_base.v1"
     }:
@@ -229,4 +230,3 @@ def load_native_base(path, device="cpu"):
     model = NativeBase(config).to(device)
     model.load_state_dict(payload["state_dict"], strict=True)
     return model.eval().requires_grad_(False)
-

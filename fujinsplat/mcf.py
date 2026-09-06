@@ -1,8 +1,7 @@
-"""Paper-snapshot MCF: fixed-endpoint curves and uncentered couplings.
+"""Monotone Color Flow: fixed-endpoint curves and uncentered couplings.
 
     ABI: 8 x 3 x 16 curve coefficients, then 7 x 3 x 9 coupling coefficients.
-    Domain: encoded base RGB. This is NOT the old linear/.1/1.75 checkpoint ABI
-    and NOT the experimental offset-plus-15-slopes (unanchored) curve ABI.
+    Domain: encoded Base RGB. Coefficients follow MCFConfig's versioned ABI.
 """
 
 from dataclasses import asdict, dataclass
@@ -24,7 +23,7 @@ class MCFConfig:
 
     def validate(self):
         if asdict(self) != asdict(MCFConfig()):
-            raise ValueError("MCF ABI mismatch; legacy/capacity settings require a separate version")
+            raise ValueError("MCF configuration does not match the supported ABI")
 
 
 CONFIG = MCFConfig()

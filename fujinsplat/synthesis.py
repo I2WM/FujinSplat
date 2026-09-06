@@ -1,4 +1,4 @@
-"""Reverse synthesis using the uploaded supplementary compiler, unchanged.
+"""Reverse synthesis with exact labels from the MCF parameter compiler.
 
 Labels describe the realized bounded MCF, not necessarily textbook affine haze.
 """
@@ -21,7 +21,7 @@ COMPILER = {
 
 
 def depth_contrasts(depth_maps, target_median=0.36):
-    """Uploaded depth_to_t equation, including finite-sample median order."""
+    """Calibrate contrast from log depth ranges using population medians."""
     stats = []
     for depth in depth_maps:
         depth = np.asarray(depth)
@@ -55,10 +55,10 @@ def psnr(a, b):
 
 @torch.inference_mode()
 def reverse_capture(clean_raw, matrix, c_base, t, gain=1.0):
-    """User-approved analytic inverse convention; test stored float32 arrays.
+    """Generate an analytically inverted RAW observation and verify float32 cycles.
 
-    J is the FLOORED endpoint; J_unfloored preserves the original. The uploaded
-    script saved unfloored J, which must not become the exact-label loss target.
+    J is the floor-clamped supervision endpoint; J_unfloored preserves the
+    clean output before this clamp.
     H and synthetic RAW retain their analytic floating values, including
     out-of-range values. They are mathematical intermediates, not uint16
     sensor observations. Only the controller RAW summary clips to [0,1].

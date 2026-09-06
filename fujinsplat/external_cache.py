@@ -1,8 +1,8 @@
-"""External Sony Base calibration / J-cache, ported from the uploaded scripts.
+"""External Sony Base calibration and clean-image cache generation.
 
 Two explicit stages: fit ONE shared CCM on a declared calibration manifest;
 then develop external captures with their recorded WB and that frozen CCM.
-No RealX capture, old synthesized image, or hidden cache bootstrap is read.
+Inputs are the external captures listed in the supplied manifest.
 """
 
 import argparse
@@ -59,7 +59,7 @@ def main():
     rows = capture_rows(a.manifest)
     if a.stage == "fit_matrix":
         # Accumulate the declared sampled rows without retaining full captures.
-        # lstsq itself remains identical to the uploaded pooled fit.
+        # Fit one shared matrix by pooled least squares.
         rng = np.random.default_rng(0)
         aa, bb, hashes = [], [], []
         for row in rows:

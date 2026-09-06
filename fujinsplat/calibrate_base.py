@@ -221,6 +221,7 @@ def _fit(  # noqa: PLR0915
 ) -> CalibrationBase:
     model = base.to(device).train()
     optimizer = _optimizer(model)
+    # These fixed labels preserve the reference lattice sampling sequence.
     l257 = lattice.sampler_pair(model.config.fine_grid_size, "FILE46_L257", LATTICE_TERMS)
     r33 = lattice.sampler_pair(model.config.residual_grid_size, "FILE46_R33", LATTICE_TERMS)
     initial_lrs = [float(group["lr"]) for group in optimizer.param_groups]
@@ -359,6 +360,7 @@ def project_parent_state(state, *, device="cpu", sigma=1.0):
 
 def load_parent(path, scene, device, sigma):
     payload = torch.load(path, map_location="cpu", weights_only=False)
+    # The supplied parent weights retain their existing serialization identifier.
     if payload.get("schema") != "PHASE21_NATIVE_J0_ZERO_CLEAN_HAZE_BASE_CHECKPOINT_V0":
         raise ValueError("expected the original native parent Base checkpoint")
     if payload.get("scene") != scene or payload.get("source_clean_reads") != 0 or payload.get("held_test_reads") != 0:

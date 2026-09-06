@@ -1,4 +1,4 @@
-"""Explicit-weight Depth-Anything-V2-Small inference, matching the uploaded code."""
+"""Infer scalar transmission using local Depth-Anything-V2-Small weights."""
 
 import argparse
 from pathlib import Path
@@ -46,7 +46,7 @@ def main():
     a = p.parse_args()
     pop = read_json(a.population)
     if len(pop["t"]) != 195:
-        raise ValueError("no fallback to the old 25-pair population")
+        raise ValueError("expected the complete 195-pair transmission population")
     model = build_model(a.weights).to(a.device)
     rows = []
     for path in sorted(a.j_cache.glob("*.npy")):

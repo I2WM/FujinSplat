@@ -56,6 +56,7 @@ class DifferenceInventory:
 
 
 def _affine(total: int, label: str, epoch: int) -> tuple[int, int]:
+    # This fixed seed prefix preserves the reference sampling sequence.
     digest = hashlib.sha256(
         f"phase19-contract-a-lattice|{label}|{SEED}|{epoch}|{total}".encode("ascii")
     ).digest()

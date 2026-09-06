@@ -51,11 +51,11 @@ def load_checkpoint(path, device="cpu"):
     else:
         payload = value  # Backward compatibility for local unit fixtures only.
     if payload.get("schema") != SCHEMA or payload.get("status") != "SEALED":
-        raise ValueError("not a sealed new-ABI controller; old checkpoints are not silently imported")
+        raise ValueError("expected a sealed checkpoint with the supported Controller schema")
     MCFConfig(**payload["mcf"]).validate()
     if payload.get("held_target_reads") != 0 or payload.get("scene_id_inputs") != 0:
         raise ValueError("checkpoint contact contract mismatch")
-    # Preserve historical sidecar provenance without using it as a training dispatch.
+    # Keep training provenance separate from command dispatch.
     if not isinstance(payload.get("training_kind"), str) or not payload["training_kind"]:
         raise ValueError("missing controller training lineage")
     model = Controller().to(device)
