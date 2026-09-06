@@ -1,0 +1,6 @@
+{
+  "command": "external-cache",
+  "stage": "fit_matrix",
+  "manifest": "/path/to/external_calibration/MANIFEST.json",
+  "output": "/path/to/external_matrix.json"
+}

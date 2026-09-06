@@ -1,0 +1,12 @@
+{
+  "command": "train-controller",
+  "manifest": "/path/to/synthetic1400/MANIFEST.json",
+  "initial": "/path/to/controller.pt",
+  "initial_sha256": "9bc797e99f011d10260b542b22a20b0b5d56c49be9e969f8812a42ad48898a1a",
+  "output": "/path/to/new/controller_run",
+  "device": "cuda:0",
+  "steps": 1500,
+  "batch_size": 16,
+  "lr": 0.00001,
+  "seed": 90202
+}

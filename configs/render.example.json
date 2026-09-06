@@ -1,0 +1,6 @@
+{
+  "command": "render",
+  "run": "/path/to/scene_run/Akikaze",
+  "poses": "/path/to/data_4/smoke/Akikaze/transforms_test.json",
+  "output": "/path/to/new/renders/Akikaze"
+}

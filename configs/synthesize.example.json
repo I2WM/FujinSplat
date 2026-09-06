@@ -1,0 +1,10 @@
+{
+  "command": "synthesize",
+  "j_cache": "/path/to/j_cache",
+  "population": "fujinsplat/data/synthesis_prerequisites/raw_population_195.json",
+  "depth_t": "/path/to/depth_t.json",
+  "camera_wb": "fujinsplat/data/synthesis_prerequisites/realx_camera_wb.json",
+  "output": "/path/to/synthetic1400",
+  "scratch": "/path/to/scratch/synthesis",
+  "workers": 8
+}

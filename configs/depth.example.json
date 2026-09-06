@@ -1,0 +1,8 @@
+{
+  "command": "depth",
+  "j_cache": "/path/to/j_cache",
+  "population": "fujinsplat/data/synthesis_prerequisites/raw_population_195.json",
+  "weights": "/path/to/weights/depth/model.safetensors",
+  "output": "/path/to/depth_t.json",
+  "device": "cuda:0"
+}

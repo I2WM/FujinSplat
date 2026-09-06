@@ -1,0 +1,6 @@
+{
+  "command": "acquire",
+  "output": "/path/to/external_raw",
+  "scratch": "/path/to/scratch/raw",
+  "workers": 6
+}

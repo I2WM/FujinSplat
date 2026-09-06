@@ -1,0 +1,15 @@
+{
+  "command": "calibrate-base",
+  "scene": "Akikaze",
+  "raw_root": "/path/to/data_arw_4/smoke",
+  "rgb_root": "/path/to/data_4/smoke",
+  "initial_parent": "/path/to/parent_base/Akikaze/complete_model.pt",
+  "output": "/path/to/native_base/Akikaze",
+  "device": "cuda:0",
+  "warmup_steps": 100,
+  "joint_steps": 400,
+  "pixels_per_update": 8192,
+  "jacobian_weight": 0.01,
+  "seed": 82751,
+  "projection_sigma": 1.0
+}

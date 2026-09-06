@@ -1,0 +1,7 @@
+{
+  "command": "external-cache",
+  "stage": "build_cache",
+  "manifest": "/path/to/external_raw/MANIFEST.json",
+  "matrix": "/path/to/external_matrix.json",
+  "output": "/path/to/j_cache"
+}

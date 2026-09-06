@@ -1,0 +1,13 @@
+{
+  "command": "scene",
+  "scene": "Akikaze",
+  "controller": "/path/to/controller.pt",
+  "controller_format": "weights",
+  "controller_sha256": "9bc797e99f011d10260b542b22a20b0b5d56c49be9e969f8812a42ad48898a1a",
+  "raw_root": "/path/to/data_arw_4/smoke",
+  "rgb_root": "/path/to/data_4/smoke",
+  "base_root": "/path/to/native_base",
+  "prepared": "/path/to/new/prepared/Akikaze",
+  "run": "/path/to/new/runs/Akikaze",
+  "renders": "/path/to/new/renders/Akikaze"
+}

@@ -9,29 +9,26 @@
 
 <p align="center">
   <a href="#setup">Setup</a> ·
+  <a href="#training">Training</a> ·
   <a href="#reconstruction">Reconstruction</a> ·
   <a href="#results">Results</a> ·
-  <a href="#training">Training</a> ·
   <a href="#citation">Citation</a>
 </p>
 
+## Overview
+
 ![FujinSplat paper teaser: smoke removal and novel-view synthesis](assets/teaser.png)
 
-<details>
-<summary>Method overview</summary>
+## Method
 
-![FujinSplat pipeline](assets/pipeline.png)
+![FujinSplat pipeline from the paper](assets/pipeline.png)
 
-Base ISP + RAW color flow + training-only Delta-ISP → static 3DGS.
-
-</details>
+A frozen Base ISP and RAW-guided color flow correct the training views.
+Delta-ISP aligns their appearance during 3DGS training; novel views use the static renderer.
 
 ## Setup
 
-Linux · Python 3.9 · PyTorch 2.0.1 · CUDA 11.8. Run commands from the repository root.
-
-<details>
-<summary>Installation</summary>
+Linux · Python 3.9 · PyTorch 2.0.1 · CUDA toolkit 11.8. Run from the repository root.
 
 ```bash
 conda create -n fujinsplat python=3.9 -y
@@ -45,14 +42,12 @@ python -m pip install --no-build-isolation ./submodules/simple-knn
 python -m pip install --no-build-isolation --no-deps -e .
 ```
 
-</details>
+CUDA extension sources are bundled in `submodules/`.
 
-Data and weights: Google Drive links coming soon.
+### Data and weights
 
-<details>
-<summary>Data layout</summary>
-
-RAW NPZ: `linear_rgb`, H×W×3 uint16 or normalized float; no WB or gamma.
+Google Drive links will be added here. RAW is demosaiced sensor RGB without WB or gamma;
+NPZ key `linear_rgb` is H×W×3 uint16 or normalized floating point.
 
 ```text
 DATA_ROOT/
@@ -66,35 +61,68 @@ DATA_ROOT/
   weights/base/SCENE/complete_model.pt
 ```
 
-</details>
+Copy `*.example.json` to `*.local.json` and fill in literal paths; relative paths
+start at the repository root. Windows paths may use `/`. Local configs are Git-ignored.
+
+## Training
+
+Run the stages below in order, matching each output to the next stage's input.
+
+| Stage | Configuration |
+| --- | --- |
+| Scene Base ISP | [base.example.json](configs/base.example.json) |
+| External RAW acquisition | [acquire.example.json](configs/acquire.example.json) |
+| External Base matrix | [external_matrix.example.json](configs/external_matrix.example.json) |
+| External clean cache | [external_cache.example.json](configs/external_cache.example.json) |
+| Depth-derived transmission | [depth.example.json](configs/depth.example.json) |
+| Reverse synthesis | [synthesize.example.json](configs/synthesize.example.json) |
+| Controller pretraining | [controller.pretrain.example.json](configs/controller.pretrain.example.json) |
+
+```bash
+python -m fujinsplat --config configs/base.local.json --check-only
+python -m fujinsplat --config configs/base.local.json
+python -m fujinsplat --config configs/acquire.local.json
+python -m fujinsplat --config configs/external_matrix.local.json
+python -m fujinsplat --config configs/external_cache.local.json
+python -m fujinsplat --config configs/depth.local.json
+python -m fujinsplat --config configs/synthesize.local.json
+python -m fujinsplat --config configs/controller.pretrain.local.json --check-only
+python -m fujinsplat --config configs/controller.pretrain.local.json
+```
+
+Base calibration runs per scene and requires the original L257 parent weights.
+The synthesis stages require 16 calibration ARWs and Depth-Anything-V2-Small
+weights; [195-pair statistics and WB](fujinsplat/data/synthesis_prerequisites/MANIFEST.json)
+are bundled. The calibration manifest uses schema `fujinsplat.external_raw.v1`
+with 16 `rows`: `{"capture_id": "name", "raw": "/path/to/capture.ARW"}`.
+
+The pretraining example follows the paper: fresh initialization, 1500 steps,
+batch 16, learning rate 0.0003. Point `scene.local.json` to its `checkpoint.pt`
+and the calibrated Base directory before reconstruction.
+
+The downloaded `controller.local.json` is a server warm-start dry run.
+For paper pretraining use `controller.pretrain.local.json`; `--check-only`
+checks inputs without training. Remove `"check_only": true` from a config to train.
 
 ## Reconstruction
 
-Set paths to the downloaded weights and data; use a new output directory.
+Configure `scene.local.json` from [scene.example.json](configs/scene.example.json) with the trained Controller
+and Base paths. Update or remove its example hash when changing weights.
 
 ```bash
-export DATA_ROOT=/absolute/path/to/data
-export WORK_ROOT=/absolute/path/to/new_run
-export RAW_ROOT="$DATA_ROOT/raw/smoke"
-export RGB_ROOT="$DATA_ROOT/rgb/smoke"
-export BASE_ROOT="$DATA_ROOT/weights/base"
-export CONTROLLER="$DATA_ROOT/weights/controller.pt"
-export SCENES="Akikaze Futaba Hinoki Koharu Midori Natsume Shirohana Tsubaki"
-
-for SCENE in $SCENES; do
-  python -m fujinsplat scene --scene "$SCENE" \
-    --raw-root "$RAW_ROOT" --rgb-root "$RGB_ROOT" --base-root "$BASE_ROOT" \
-    --controller "$CONTROLLER" --controller-format weights \
-    --prepared "$WORK_ROOT/prepared/$SCENE" --run "$WORK_ROOT/runs/$SCENE" \
-    --renders "$WORK_ROOT/renders/$SCENE"
-done
-
-python -m fujinsplat evaluate --renders "$WORK_ROOT/renders" --rgb-root "$RGB_ROOT" \
-  --output "$WORK_ROOT/evaluation" --variant FujinSplat --purpose final_readout
+python -m fujinsplat --config configs/scene.local.json
 ```
 
-18k iterations · SH3 · Delta at 13k–16k. Outputs: `RESULT.json` and
-`held_view_metrics.csv`; four held views per scene, equal-scene averaging.
+This prepares, trains and renders one scene. Repeat with matching `scene` and
+paths for all eight scenes, then evaluate:
+
+```bash
+python -m fujinsplat --config configs/evaluate.local.json
+```
+
+Use [evaluate.example.json](configs/evaluate.example.json) for evaluation or
+[render.example.json](configs/render.example.json) to render an existing model.
+Scores are written to `RESULT.json` and `held_view_metrics.csv`.
 
 ## Results
 
@@ -116,66 +144,28 @@ Paper results: **18.42 dB PSNR · 0.679 SSIM · 0.541 LPIPS**.
 
 <sub>Top: smoky RGB. Bottom: ft8000 reconstructions at the same source-camera poses.</sub>
 
-[Per-scene paper metrics](configs/paper_results.json).
+| Scene | PSNR ↑ | SSIM ↑ | LPIPS ↓ |
+| --- | ---: | ---: | ---: |
+| Akikaze | 19.91 | 0.699 | 0.494 |
+| Futaba | 18.88 | 0.763 | 0.485 |
+| Hinoki | 16.46 | 0.490 | 0.722 |
+| Koharu | 18.85 | 0.705 | 0.517 |
+| Midori | 20.11 | 0.749 | 0.479 |
+| Natsume | 17.33 | 0.687 | 0.533 |
+| Shirohana | 16.68 | 0.570 | 0.581 |
+| Tsubaki | 19.15 | 0.771 | 0.517 |
+| **Average** | **18.42** | **0.679** | **0.541** |
 
-## Training
+The seven-scene subset excluding Akikaze reports 18.2083 dB.
+[Machine-readable results](configs/paper_results.json).
 
-<details>
-<summary>Calibrate the Base ISP and train the Controller</summary>
-
-Before reconstruction, using the paths above. Requires L257 parent Bases,
-16 calibration ARWs and Depth-Anything-V2-Small weights.
-
-```bash
-export BASE_ROOT="$WORK_ROOT/bases"
-for SCENE in $SCENES; do
-  python -m fujinsplat calibrate-base --scene "$SCENE" \
-    --raw-root "$RAW_ROOT" --rgb-root "$RGB_ROOT" \
-    --initial-parent "$DATA_ROOT/weights/parent_base/$SCENE/complete_model.pt" \
-    --output "$BASE_ROOT/$SCENE" --device cuda:0
-done
-
-export INPUTS="$PWD/fujinsplat/data/synthesis_prerequisites"
-export EXTERNAL_ROOT="$WORK_ROOT/external_raw"
-export J_CACHE="$WORK_ROOT/j_cache"
-export SYNTHETIC_ROOT="$WORK_ROOT/synthetic"
-
-python -m fujinsplat.acquire_mit --output "$EXTERNAL_ROOT" \
-  --scratch "$WORK_ROOT/raw_scratch" --workers 6
-python -m fujinsplat external-cache --stage fit_matrix \
-  --manifest "$DATA_ROOT/external_calibration/MANIFEST.json" \
-  --output "$WORK_ROOT/external_matrix.json"
-python -m fujinsplat external-cache --stage build_cache \
-  --manifest "$EXTERNAL_ROOT/MANIFEST.json" \
-  --matrix "$WORK_ROOT/external_matrix.json" --output "$J_CACHE"
-python -m fujinsplat depth --j-cache "$J_CACHE" \
-  --population "$INPUTS/raw_population_195.json" \
-  --weights "$DATA_ROOT/weights/depth/model.safetensors" \
-  --output "$WORK_ROOT/depth_t.json" --device cuda:0
-python -m fujinsplat synthesize --j-cache "$J_CACHE" \
-  --population "$INPUTS/raw_population_195.json" \
-  --depth-t "$WORK_ROOT/depth_t.json" --camera-wb "$INPUTS/realx_camera_wb.json" \
-  --output "$SYNTHETIC_ROOT" --scratch "$WORK_ROOT/synthesis_scratch" --workers 8
-python -m fujinsplat train-controller \
-  --manifest "$SYNTHETIC_ROOT/MANIFEST.json" --output "$WORK_ROOT/controller" \
-  --steps 1500 --batch-size 16 --lr 0.0003 --seed 90202
-export CONTROLLER="$WORK_ROOT/controller/checkpoint.pt"
-```
-
-Base: 100 + 400 updates. Controller: 1400 external RAWs and
-[bundled statistics](fujinsplat/data/synthesis_prerequisites/MANIFEST.json).
-Calibration manifest: `schema: fujinsplat.external_raw.v1`, with 16 `rows`
-entries: `{"capture_id": "name", "raw": "/path/to/capture.ARW"}`.
-
-CPU checks:
+## Checks
 
 ```bash
 CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=2 python -B -m unittest discover -s tests -v
 ```
 
-49 tests pass; full GPU reproduction with final release weights is pending.
-
-</details>
+59 CPU tests pass. Full GPU reproduction with the final release weights is pending.
 
 ## Citation
 

@@ -1,0 +1,9 @@
+{
+  "command": "evaluate",
+  "renders": "/path/to/new/renders",
+  "rgb_root": "/path/to/data_4/smoke",
+  "output": "/path/to/new/evaluation",
+  "variant": "FujinSplat",
+  "purpose": "final_readout",
+  "device": "cuda:0"
+}
