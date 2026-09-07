@@ -7,12 +7,10 @@
   Gengjia Chang · Ziteng Cui · Shuhong Liu
 </p>
 
-<!-- Replace the three href="#" placeholders when the paper and download URLs are ready. -->
+<!-- Replace the Paper placeholder when its public URL is available. -->
 <h3 align="center">
   <a href="#" title="Paper link coming soon">📄 Paper</a> |
-  <a href="https://i2wm.github.io/FujinSplat/">🌐 Project Page</a> |
-  <a href="#" title="Controller weights download coming soon">🧠 Controller Weights</a> |
-  <a href="#" title="Dataset download coming soon">📦 Dataset</a>
+  <a href="https://i2wm.github.io/FujinSplat/">🌐 Project Page</a>
 </h3>
 
 ## Overview
@@ -45,7 +43,9 @@ CUDA extension sources are bundled in `submodules/`.
 
 ### Data and weights
 
-Google Drive links will be added here. RAW is demosaiced sensor RGB without WB or gamma;
+Datasets and pretrained weights will be released after paper acceptance.
+
+RAW is demosaiced sensor RGB without WB or gamma;
 NPZ key `linear_rgb` is H×W×3 uint16 or normalized floating point.
 
 ```text
