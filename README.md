@@ -7,9 +7,8 @@
   Gengjia Chang · Ziteng Cui · Shuhong Liu
 </p>
 
-<!-- Replace the Paper placeholder when its public URL is available. -->
 <h3 align="center">
-  <a href="#" title="Paper link coming soon">📄 Paper</a> |
+  <a href="https://arxiv.org/abs/2609.06017" title="Read the paper on arXiv">📄 Paper</a> |
   <a href="https://i2wm.github.io/FujinSplat/">🌐 Project Page</a>
 </h3>
 
